@@ -67,7 +67,7 @@ class DevCrew:
     
 
 st.title("Welcome to Shehroz Hanif's Agentic World")
-st.title("Python Code Generator Agent")
+st.title("Python Code Generator")
 user_input = st.text_input("Enter the problem statement:", "")
 if st.button("Generate Code"):
     if user_input.strip():
