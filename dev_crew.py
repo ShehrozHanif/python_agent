@@ -74,6 +74,7 @@ class DevCrew:
 
 
 
+
 import streamlit as st
 
 # Custom CSS to disable default browser suggestions
@@ -101,13 +102,25 @@ suggestions = [
 # Text input where users can type freely
 user_input = st.text_input("Enter the problem statement:", "")
 
-# Show suggestions below the text input if user starts typing
-if user_input:
-    st.write("Suggestions:")
+# Display suggestions only when the input field is focused
+if "show_suggestions" not in st.session_state:
+    st.session_state.show_suggestions = False
+
+def toggle_suggestions():
+    st.session_state.show_suggestions = True
+
+def select_suggestion(suggestion):
+    st.session_state.user_input = suggestion
+    st.session_state.show_suggestions = False
+
+if user_input == "":
+    toggle_suggestions()
+
+if st.session_state.show_suggestions:
+    st.write("### Suggestions:")
     for suggestion in suggestions:
-        if user_input.lower() in suggestion.lower():
-            if st.button(suggestion):
-                user_input = suggestion  # Auto-fill input field
+        if st.button(suggestion):
+            select_suggestion(suggestion)
 
 if st.button("Generate Code"):
     if user_input.strip():
@@ -130,9 +143,6 @@ if st.button("Generate Code"):
             st.error("No response generated. Please try again.")
     else:
         st.warning("Please enter a problem statement before generating code.")
-
-
-
 
 
 
