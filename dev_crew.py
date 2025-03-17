@@ -66,13 +66,6 @@ class DevCrew:
         )
     
 
-suggestions = [
-    "Write a Python function to reverse a string.",
-    "Create a calculator using Python.",
-    "Generate Fibonacci sequence using recursion.",
-    "Build a to-do list application using Python.",
-    "Sort a list of numbers in ascending order."
-]
 
 
 
@@ -80,7 +73,7 @@ suggestions = [
 
 st.title("Welcome to Shehroz Hanif's Agentic World")
 st.title("Python Code Generator")
-user_input = st.text_input("Enter the problem statement:", "" + suggestions)
+user_input = st.text_input("Enter the problem statement:", "" )
 
 if st.button("Generate Code"):
     if user_input.strip():
