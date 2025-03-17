@@ -81,8 +81,7 @@ suggestions = [
 
 st.title("Welcome to Shehroz Hanif's Agentic World")
 st.title("Python Code Generator")
-# user_input = st.text_input("Enter the problem statement:", "" )
-user_input = st.text_input("Choose or enter a problem statement:", options=[""] + suggestions)
+user_input = st.text_input("Enter the problem statement:", "" )
 
 
 if st.button("Generate Code"):
