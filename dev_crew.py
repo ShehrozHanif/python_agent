@@ -72,9 +72,6 @@ class DevCrew:
 
 
 
-
-
-
 import streamlit as st
 
 # Custom CSS to disable default browser suggestions
@@ -99,28 +96,30 @@ suggestions = [
     "Sort a list of numbers in ascending order."
 ]
 
+# Initialize session state for user input if not set
+if "user_input" not in st.session_state:
+    st.session_state.user_input = ""
+
 # Text input where users can type freely
-user_input = st.text_input("Enter the problem statement:", "")
+user_input = st.text_input("Enter the problem statement:", st.session_state.user_input)
 
 # Display suggestions only when the input field is focused
 if "show_suggestions" not in st.session_state:
     st.session_state.show_suggestions = False
-
-def toggle_suggestions():
-    st.session_state.show_suggestions = True
 
 def select_suggestion(suggestion):
     st.session_state.user_input = suggestion
     st.session_state.show_suggestions = False
 
 if user_input == "":
-    toggle_suggestions()
+    st.session_state.show_suggestions = True
 
 if st.session_state.show_suggestions:
     st.write("### Suggestions:")
     for suggestion in suggestions:
         if st.button(suggestion):
             select_suggestion(suggestion)
+            st.rerun()
 
 if st.button("Generate Code"):
     if user_input.strip():
@@ -143,6 +142,94 @@ if st.button("Generate Code"):
             st.error("No response generated. Please try again.")
     else:
         st.warning("Please enter a problem statement before generating code.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import streamlit as st
+
+# # Custom CSS to disable default browser suggestions
+# custom_css = """
+# <style>
+#     input[type='text'] {
+#         autocomplete: off !important;
+#     }
+# </style>
+# """
+# st.markdown(custom_css, unsafe_allow_html=True)
+
+# st.title("Welcome to Shehroz Hanif's Agentic World")
+# st.title("Python Code Generator")
+
+# # Custom suggestions for problem statements
+# suggestions = [
+#     "Write a Python function to reverse a string.",
+#     "Create a calculator using Python.",
+#     "Generate Fibonacci sequence using recursion.",
+#     "Build a to-do list application using Python.",
+#     "Sort a list of numbers in ascending order."
+# ]
+
+# # Text input where users can type freely
+# user_input = st.text_input("Enter the problem statement:", "")
+
+# # Display suggestions only when the input field is focused
+# if "show_suggestions" not in st.session_state:
+#     st.session_state.show_suggestions = False
+
+# def toggle_suggestions():
+#     st.session_state.show_suggestions = True
+
+# def select_suggestion(suggestion):
+#     st.session_state.user_input = suggestion
+#     st.session_state.show_suggestions = False
+
+# if user_input == "":
+#     toggle_suggestions()
+
+# if st.session_state.show_suggestions:
+#     st.write("### Suggestions:")
+#     for suggestion in suggestions:
+#         if st.button(suggestion):
+#             select_suggestion(suggestion)
+
+# if st.button("Generate Code"):
+#     if user_input.strip():
+#         response = DevCrew().crew().kickoff(inputs={"problem": user_input})
+#         if response:
+#             st.code(response, language='python')
+
+#             # Save the response as a file
+#             file_name = "response.py"
+#             with open(file_name, "w") as f:
+#                 f.write(str(response))
+
+#             # Provide download button
+#             with open(file_name, "rb") as f:
+#                 st.download_button(label="Download Generated Code",
+#                                    data=f,
+#                                    file_name=file_name,
+#                                    mime="text/x-python")
+#         else:
+#             st.error("No response generated. Please try again.")
+#     else:
+#         st.warning("Please enter a problem statement before generating code.")
 
 
 
