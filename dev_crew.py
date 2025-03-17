@@ -67,13 +67,7 @@ class DevCrew:
     
 
 
-suggestions = [
-    "Write a Python function to reverse a string.",
-    "Create a calculator using Python.",
-    "Generate Fibonacci sequence using recursion.",
-    "Build a to-do list application using Python.",
-    "Sort a list of numbers in ascending order."
-]
+
 
 
 
